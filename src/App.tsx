@@ -5,6 +5,7 @@ import FloatingPanel from './components/FloatingPanel';
 import AnimatedBackground from './components/AnimatedBackground';
 import { DataBack, GeneralBack, UtilBack } from './components/backend/BackendServices';
 import Router from './Router';
+import Footer from './components/Footer';
 
 const App = () => {
   const [isNightMode, setIsNightMode] = useState(false);
@@ -17,7 +18,7 @@ const App = () => {
   }, [isNightMode]);
 
   return (
-    <div className={`min-h-screen ${isNightMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+    <div className={`min-h-screen flex flex-col ${isNightMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
       <AnimatedBackground />
       <MenuBar
         setCurrentPage={setCurrentPage}
@@ -26,9 +27,12 @@ const App = () => {
         setIsPanelOpen={setIsPanelOpen}
         setPanelContent={setPanelContent}
       />
-      <ContentBlock>
-        <Router currentPage={currentPage} />
-      </ContentBlock>
+      <div className="flex-grow">
+        <ContentBlock>
+          <Router currentPage={currentPage} />
+        </ContentBlock>
+      </div>
+      <Footer />
       <FloatingPanel
         isOpen={isPanelOpen}
         onClose={() => setIsPanelOpen(false)}
